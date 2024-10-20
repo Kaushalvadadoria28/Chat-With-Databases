@@ -7,17 +7,19 @@ from langchain.vectorstores import Chroma
 from langchain.prompts import FewShotPromptTemplate
 from langchain.chains.sql_database.prompt import PROMPT_SUFFIX, _mysql_prompt
 from langchain.prompts.prompt import PromptTemplate
-
 from few_shots import few_shots
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 if "GROQ_API_KEY" not in os.environ:
-    os.environ["GROQ_API_KEY"] = "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"
-
+    os.environ["GROQ_API_KEY"] = "GROQ_API_KEY"
 
 import sqlite3
-
 import requests
 from langchain_community.utilities.sql_database import SQLDatabase
 from sqlalchemy import create_engine
@@ -26,7 +28,7 @@ from sqlalchemy.pool import StaticPool
 def get_few_shot_db_chain():
     def get_engine_for_db():
         """Pull sql file, populate in-memory database, and create engine."""
-        url = "https://raw.githubusercontent.com/lerocha/chinook-database/master/ChinookDatabase/DataSources/Chinook_Sqlite.sql"
+        url = "DATABASE_URL"
         response = requests.get(url)
         sql_script = response.text
 

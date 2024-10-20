@@ -1,0 +1,9 @@
+langchain
+sentence-transformers
+chromadb
+requests
+sqlalchemy
+langchain_groq
+langchain_experimental
+langchain_community
+streamlit
